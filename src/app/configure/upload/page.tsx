@@ -11,13 +11,12 @@ import { useToast } from '@/components/ui/use-toast';
 const Page = () => {
   const { toast } = useToast();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
-  const isUploading = false;
   const [isPending, startTransition] = useTransition();
 
   const [uploadProgress, setUploadProgress] = useState<number>(0); // progress bar 0% - 100%
   const router = useRouter();
   
-  const { startUpload } = useUploadThing("imageUploader", {
+  const { startUpload, isUploading } = useUploadThing("imageUploader", {
     onClientUploadComplete: ([data]) => {
       const configId = data.serverData.configId; // type safe
       startTransition(() => {
